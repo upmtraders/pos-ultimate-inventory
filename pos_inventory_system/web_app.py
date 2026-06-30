@@ -102,7 +102,7 @@ from pos_inventory_system.services.woocommerce_service import WooCommerceService
 from pos_inventory_system.ui.menu_structure import MENU_SECTIONS
 
 
-HOST = "127.0.0.1"
+HOST = os.getenv("POS_HOST", "0.0.0.0")
 PORT = 8000
 SESSION_TIMEOUT_SECONDS = 8 * 60 * 60
 
@@ -17867,5 +17867,5 @@ def main() -> None:
     initialize_database()
     AuthService().ensure_default_admin()
     server = ThreadingHTTPServer((HOST, PORT), POSWebHandler)
-    print(f"POS Ultimate web app running at http://localhost:{PORT}")
+    print(f"POS Ultimate web app running at http://{HOST}:{PORT}")
     server.serve_forever()
